@@ -1,0 +1,31 @@
+message: Greetings from the EXPENSE_MAMAGEMENT-COMMAND microservice [using the LOCALHOST config].
+
+#debug: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+    
+authserver:
+  hostname: http://localhost:8083
+security:
+  oauth2:
+    resource:
+      loadBalanced: true
+      userInfoUri: ${authserver.hostname}/user
+      
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+            #aop: DEBUG
+            #dao: DEBUG
+            #orm: DEBUG
+            #amqp: DEBUG
+            #data: DEBUG
+            #transaction: DEBUG
+        org.axonframework: INFO
+        com.soagrowers: INFO
+    file: ./build/logs/expense-management-command-server.log

@@ -1,0 +1,35 @@
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_IP:localhost}:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+zuul:
+  routes:
+    product-command-side:
+      path: /commands/**
+    product-query-side:
+      path: /queries/**
+  debug:
+    request: true
+    response: true
+    
+authserver:
+  hostname: http://localhost:8083
+security:
+  oauth2:
+    resource:
+      loadBalanced: true
+      userInfoUri: ${authserver.hostname}/user
+
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+        com.netflix.niws.client.http: DEBUG
+        com.soagrowers: DEBUG
