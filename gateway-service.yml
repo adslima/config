@@ -20,7 +20,7 @@ zuul:
     response: true
     
 authserver:
-  hostname: http://localhost:8083
+  hostname: http://${AUTH_IP:localhost}:8083
 security:
   oauth2:
     resource:
