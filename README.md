@@ -1,2 +1,2 @@
 # config
-repositorio para configurações
+Repositorio para configurações
