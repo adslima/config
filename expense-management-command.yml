@@ -4,12 +4,12 @@ message: Greetings from the EXPENSE_MAMAGEMENT-COMMAND microservice [using the L
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${EUREKA_IP:localhost}:8761/eureka/
   instance:
     preferIpAddress: true
     
 authserver:
-  hostname: http://localhost:8083
+  hostname: http://${AUTH_IP:localhost}:8083
 security:
   oauth2:
     resource:
