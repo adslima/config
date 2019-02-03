@@ -4,8 +4,11 @@ ribbon:
     enabled: true
 
 eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
   instance:
-    hostname: localhost
+    preferIpAddress: true
     
 authserver:
   hostname: http://localhost:8083
