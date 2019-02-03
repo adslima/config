@@ -2,18 +2,15 @@ message: Greetings from the EXPENSE_MAMAGEMENT-COMMAND microservice [using the L
 
 #debug: true
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://${EUREKA_IP:localhost}:8761/eureka/
   instance:
-    preferIpAddress: true
+    hostname: localhost
     
 authserver:
-  hostname: http://${AUTH_IP:localhost}:8083
+  hostname: http://localhost:8083
 security:
   oauth2:
     resource:
-      loadBalanced: true
+      #loadBalanced: true
       userInfoUri: ${authserver.hostname}/user
       
 logging:

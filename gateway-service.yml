@@ -1,3 +1,4 @@
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 11000
 ribbon:
   eureka:
     enabled: true
@@ -5,32 +6,35 @@ ribbon:
 eureka:
   instance:
     hostname: localhost
-    port: 8761
-  client:
-    registerWithEureka: true
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
-  server:
-    wait-time-in-ms-when-sync-empty: 3000
-
-zuul:
-  routes:
-    product-command-side:
-      path: /commands/**
-    product-query-side:
-      path: /queries/**
-  debug:
-    request: true
-    response: true
     
 authserver:
-  hostname: http://${AUTH_IP:localhost}:8083
+  hostname: http://localhost:8083
 security:
   oauth2:
     resource:
       loadBalanced: true
       userInfoUri: ${authserver.hostname}/user
+          
+zuul:
+  prefix: /api
+  ignored-services: '*'
+  routes:
+    expense-management-command:
+      path: /commands/**
+      serviceId: expense-management-command
+      strip-prefix: false
+    expense-management-query:
+      path: /queries/**
+      serviceId: expense-management-query
+      strip-prefix: false
+    auth:
+      sensitiveHeaders:
+      #should be same as auth server context path
+      path: /auth/**
+      serviceId: auth-service
+      #should be false if server has custom context path
+      strip-prefix: false
+  add-host-header: true
 
 logging:
     level:
